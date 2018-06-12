@@ -1,0 +1,4 @@
+创建归档文件tar.gz文件
+git archive master --prefix='project/'| gzip > 'git describe master'.tar.gz
+创建zip文件
+git archive master --prefix='project/' --format=zip > 'git describe master'.zip
