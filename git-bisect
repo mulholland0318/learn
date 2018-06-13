@@ -1,0 +1,9 @@
+git bisect  start 开始测试版本
+git bisect bad  标记是一个不能运行版本
+git bisect good 标记是一个号的版本
+git bisect reset 推出git bisect
+其他命令
+git bisect help|view|log|show|run|等等
+
+
+如果给 git clone 命令传递 --recursive 选项，它就会自动初始化并更新仓库中的每一个子模块

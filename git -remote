@@ -1,0 +1,4 @@
+git remote set-head origin -d   删除origin/HEAD -> origin/master
+
+
+git push origin --delete serverfix //删除远程分支

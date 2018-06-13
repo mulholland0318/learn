@@ -1,0 +1,20 @@
+git log v2.5.. Makefile fs/   当然你也可以组合上面的命令选项；下面的命令就是找出所有从"v2.5“开 始在fs目录下的所有Makefile的修改.
+
+git log -p  你也可以让git log显示补丁(patchs):
+
+git log --stat  如果用--stat选项使用'git log',它会显示在每个提交(commit)中哪些文件被修改了, 这些文件分别添加或删除了多少行内容.
+
+git log --pretty=oneline
+git log --pretty=short
+
+你也可用‘medium','full','fuller','email' 或‘raw'. 如果这些格式不完全符合你的相求， 你也可以用‘--pretty=format'参数(参见：git log)来创建你自己的"格式“.
+
+git log --pretty=format:'%h was %an, %ar, message: %s'
+
+git log --pretty=format:'%h : %s' --graph
+
+git log --pretty=format:'%h : %s' --topo-order --graph
+
+git log --pretty=format:'%h : %s' --date-order --graph
+
+最后，你也可以用 ‘--reverse'参数来逆向显示所有日志。
