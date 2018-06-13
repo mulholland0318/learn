@@ -1,0 +1,16 @@
+git format-patch -M master //当前分支所有超前master的提交
+git format-patch origin  //抽取所有当前分支下不在origin分支下的内容（每个提交创建一个文件）
+git format-patch --root origin //提取工程开始到origin时刻的所有补丁（每个提交创建一个文件）
+git format-patch -3 //提取当前分支最后3次提交的所有补丁（每次提交创建一个补丁文件）
+
+先检查patch文件：# git apply --stat newpatch.patch
+检查能否应用成功：# git apply --check  newpatch.patch
+打补丁：# git am --signoff < newpatch.patch
+(使用-s或--signoff选项，可以commit信息中加入Signed-off-by信息)
+
+
+ git format-patch –n 07fe            // -n指patch数，07fe对应提交的名称, 某次提交（含）之前的几次提交
+ git format-patch -s 4e16                // 某次提交以后的所有patch, --4e16指的是SHA1 ID
+
+
+ git blame 1.txt 查看文件修改情况
