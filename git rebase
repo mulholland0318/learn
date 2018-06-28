@@ -12,3 +12,71 @@ $ git rebase master server
 呃，奇妙的变基也并非完美无缺，要用它得遵守一条准则：
 
 不要对在你的仓库外有副本的分支执行变基。
+
+
+
+
+
+两种经典用法 
+问题场景1.如何删除历史中某项提交？ 
+【案例】去除提交列表中的某个commit，例如在master分支上A->B->C->D->E->F, 除去D。 
+方案一： 
+git checkout C //将HEAD切换到C提交 
+git cherry-pick master^ //master^即E,将E放在C后面，E的HSA1值改变 
+git cherry-pick master //master即F,将F放在E后面，F的HSA1值改变 
+git checkout master //将HEAD切换到master分支 
+git reset –hard HEAD@{1} //将HEAD切换到最新的F 
+方案二： 
+采用变基的方式 
+git rebase –onto C E^ F //前后开闭区间，E^即D，表面C后面加上(D,F] 
+git checkout master 
+git reset –hard HEAD@{1} 
+方案三： 
+交互式变基 
+git rebase -i D^ 
+然后删除第一行(?没明白意思)
+
+问题场景2.如何合并历史提交？ 
+【案例】在master分支上A->B->C->D->E->F, 合并D到C，即A->B->CD->E->F。 
+方案一： 
+git checkout D 
+git reset –soft HEAD^^ 
+git commit -c C//-c表示重用C的提交信息 
+git cherry-pick E 
+git cherry-pick F 
+git checkout master 
+git reset –hard HEAD@{1} 
+方案二： 
+用变基命令 
+git checkout D 
+git reset –soft HEAD^^ 
+git commit -c C//-c表示重用C的提交信息 
+git tag newbase 
+git rebase –onto newbase E^ master 
+git tag -d newbase//清理该tag 
+方案三：交互式变基 
+git rebase -i C^ 
+将第二行的pick更改为squash，二者将合并(?还是没明白意思)
+
+
+-------------------------------------------
+rebase 和 merge的另一个区别是rebase 的冲突是一个一个解决，如果有十个冲突，先解决第一个，然后用命令
+
+git add -u 
+git rebase --continue 
+1
+2
+继续后才会出现第二个冲突，直到所有冲突解决完，而merge 是所有的冲突都会显示出来。 
+另外如果rebase过程中，你想中途退出，恢复rebase前的代码则可以用命令 
+git rebase --abort
+------------------------
+
+git rebase 
+while(存在冲突) {
+    git status
+    找到当前冲突文件，编辑解决冲突
+    git add -u
+    git rebase --continue
+    if( git rebase --abort )
+        break; 
+}
