@@ -12,3 +12,19 @@ $ git diff HEAD -- ./lib
 上面这条命令会显示你当前工作目录下的lib目录与上次提交之间的差别(或者更准确的 说是在当前分支)。
 
 git diff --stat 如果不是查看每个文件的详细差别，而是统计一下有哪些文件被改动，有多少行被改 动，就可以使用‘--stat' 参数。
+
+
+e、输出自topic和master分别开发以来，master分支上的changed。
+    git diff topic...master
+
+    f、查看简单的diff结果，可以加上--stat参数
+    git diff --stat
+
+g、查看当前目录和另外一个分支的差别
+    git diff test
+显示当前目录和另一个叫'test'分支的差别
+    git diff HEAD -- ./lib
+
+
+或者可以输出到文件里：
+ git diff commit-id-1 commit-id-2 >> diff.txt

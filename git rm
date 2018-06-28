@@ -1,0 +1,39 @@
+git rm file  
+该命令只用于删除某个分支上的稳定文件
+命令执行后work area 删除file文件，并把删除的file文件放入暂存区
+如果要撤销删除
+git reset HEAD file 
+然后执行
+git checkout file
+执行上述命令后 回到执行git rm file 之前的状态
+
+
+git rm --cached file 删除分支上的文件file，并把删除状态放入暂存去，但是工作区域及work area 仍保留该文件
+撤销此删除操作同上
+1 、git rest HEAD file
+2、 git checkout file
+
+
+
+第一方法
+项目根路径中右击git bash
+添加一个远程仓库
+git remote add origin https://git.oschina.net/Jicklin/bokeyuan.git
+其中的origin是仓库的名称 可以换成别的
+再添加另外一个
+git remote set-url --add origin https://github.com/jicklin/bokeyuan.git
+当然如果还有的话可以接着添加
+这样就把多个远程仓库都添加进去啦
+打开.get/config可以发现
+
+
+Paste_Image.png
+直接修改config文件
+将远程仓库地址按照格式添加即可
+这样执行 就会同时同步两个库了
+
+
+作者：马木木
+链接：https://www.jianshu.com/p/dee791260538
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
